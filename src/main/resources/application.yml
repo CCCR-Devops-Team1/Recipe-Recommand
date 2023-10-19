@@ -108,7 +108,6 @@ jwt:
   secretKey: 123nu23n1u23h129312312312
 recipe:
   app:
-    id: be1566c5
-    key: e671ed726f9f3dfa5c2c396e2e0781f4
+    key: 3929da13f637443a873dd5362af40074
 
 

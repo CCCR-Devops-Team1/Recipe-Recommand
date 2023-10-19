@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecipeDto {
-    public long id;
-    public String title;
-    public String summary;
+public class RecipeCardDto {
+    public String url;
+    public String status;
+    public String time;
+
 }

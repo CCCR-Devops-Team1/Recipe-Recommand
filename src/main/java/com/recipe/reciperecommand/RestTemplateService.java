@@ -3,7 +3,10 @@ package com.recipe.reciperecommand;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.recipe.reciperecommand.Dto.RecipeCardDto;
 import com.recipe.reciperecommand.Dto.RecipeDto;
+import com.recipe.reciperecommand.Dto.RecipesDto;
+import com.recipe.reciperecommand.Dto.Response.ResponseDto;
 import com.recipe.reciperecommand.Exception.BaseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.http.HttpHeaders;
+
 import java.net.URI;
 
 import static com.recipe.reciperecommand.Dto.Response.ResponseStatus.FAIL_JSON_MAPPING;
@@ -21,14 +24,62 @@ import static com.recipe.reciperecommand.Dto.Response.ResponseStatus.FAIL_JSON_P
 
 @Service
 public class RestTemplateService {
-    @Value("${recipe.app.id}")
-    private String id ;
     @Value("${recipe.app.key}")
     private String key ;
+    public RecipesDto searchKeyword(String keyword) {
+        String url = String.format("https://api.spoonacular.com/recipes/complexSearch?query=%s&apiKey=%s", keyword, key);
+        ResponseEntity<String> responseEntity = requestApi(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+        RecipesDto recipesDto = null;
+        try{
+            recipesDto = objectMapper.readValue(responseEntity.getBody(), RecipesDto.class);
+        }catch(JsonMappingException e){
+          e.printStackTrace();
+          throw new BaseException(FAIL_JSON_MAPPING);
+        }catch(JsonProcessingException e){
+          e.printStackTrace();
+          throw new BaseException(FAIL_JSON_PROCESS);
+        }
+        return recipesDto;
+    }
 
-    public ResponseEntity getInfo(){
+    public RecipeDto getRecipe(long id) {
+        String url = String.format("https://api.spoonacular.com/recipes/%d/summary?apiKey=%s", id, key);
+        ResponseEntity<String> responseEntity = requestApi(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+        RecipeDto recipeDto = null;
+        try{
+           recipeDto = objectMapper.readValue(responseEntity.getBody(), RecipeDto.class);
+        }catch(JsonMappingException e){
+          e.printStackTrace();
+          throw new BaseException(FAIL_JSON_MAPPING);
+        }catch(JsonProcessingException e){
+          e.printStackTrace();
+          throw new BaseException(FAIL_JSON_PROCESS);
+        }
+        return recipeDto;
+    }
+
+    public RecipeCardDto getRecipeCard(long id) {
+        String url = String.format("https://api.spoonacular.com/recipes/%d/card?apiKey=%s", id, key);
+        ResponseEntity<String> responseEntity = requestApi(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+        RecipeCardDto recipeDto = null;
+        try{
+            recipeDto = objectMapper.readValue(responseEntity.getBody(), RecipeCardDto.class);
+        }catch(JsonMappingException e){
+          e.printStackTrace();
+          throw new BaseException(FAIL_JSON_MAPPING);
+        }catch(JsonProcessingException e){
+          e.printStackTrace();
+          throw new BaseException(FAIL_JSON_PROCESS);
+        }
+        return recipeDto;
+    }
+
+    public ResponseEntity requestApi(String url){
         URI uri = UriComponentsBuilder
-                .fromUriString("https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2?apiKey="+"8784bdcd46ec4df48fd9fa0c5cd768d5")
+                .fromUriString(url)
                 .encode()
                 .build()
                 .toUri();
@@ -41,19 +92,6 @@ public class RestTemplateService {
                 tokenRequest,
                 String.class
         );
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        RecipeDto recipeDto = null;
-//        try{
-//           recipeDto = objectMapper.readValue(responseEntity.getBody(), RecipeDto.class);
-//        }catch(JsonMappingException e){
-//          e.printStackTrace();
-//          throw new BaseException(FAIL_JSON_MAPPING);
-//        }catch(JsonProcessingException e){
-//          e.printStackTrace();
-//          throw new BaseException(FAIL_JSON_PROCESS);
-//        }
-//        System.out.println(recipeDto);
         return responseEntity;
-
     }
 }
