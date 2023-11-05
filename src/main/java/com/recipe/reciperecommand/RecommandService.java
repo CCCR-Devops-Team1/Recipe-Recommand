@@ -1,5 +1,6 @@
 package com.recipe.reciperecommand;
 
+import com.recipe.reciperecommand.Dto.RandomRecipes;
 import com.recipe.reciperecommand.Dto.RecipeCardDto;
 import com.recipe.reciperecommand.Dto.RecipeDto;
 import com.recipe.reciperecommand.Dto.RecipesDto;
@@ -22,5 +23,8 @@ public class RecommandService {
 
     public RecipeCardDto getRecipeCard(long id) {
         return restTemplateService.getRecipeCard(id);
+    }
+
+    public RandomRecipes getRandomRecipes() { return restTemplateService.getRandomRecipes();
     }
 }

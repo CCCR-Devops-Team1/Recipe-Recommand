@@ -1,8 +1,10 @@
 package com.recipe.reciperecommand;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.recipe.reciperecommand.Dto.RandomRecipes;
 import com.recipe.reciperecommand.Dto.RecipeCardDto;
 import com.recipe.reciperecommand.Dto.RecipeDto;
 import com.recipe.reciperecommand.Dto.RecipesDto;
@@ -26,6 +28,23 @@ import static com.recipe.reciperecommand.Dto.Response.ResponseStatus.FAIL_JSON_P
 public class RestTemplateService {
     @Value("${recipe.app.key}")
     private String key ;
+    public RandomRecipes getRandomRecipes() {
+        String url = String.format("https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert&apiKey=%s",key);
+        ResponseEntity<String> responseEntity = requestApi(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        RandomRecipes recipesDto = null;
+        try{
+            recipesDto = objectMapper.readValue(responseEntity.getBody(), RandomRecipes.class);
+        }catch(JsonMappingException e){
+            e.printStackTrace();
+            throw new BaseException(FAIL_JSON_MAPPING);
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+            throw new BaseException(FAIL_JSON_PROCESS);
+        }
+        return recipesDto;
+    }
     public RecipesDto searchKeyword(String keyword) {
         String url = String.format("https://api.spoonacular.com/recipes/complexSearch?query=%s&apiKey=%s", keyword, key);
         ResponseEntity<String> responseEntity = requestApi(url);

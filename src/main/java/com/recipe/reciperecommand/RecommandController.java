@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RecommandController {
     private final RecommandService recommandService;
     // 검색어로 레시피 리스트 조회
@@ -24,5 +25,9 @@ public class RecommandController {
     @PostMapping("/recommand/{id}")
     public ResponseDto getRecipeCard(@PathVariable long id){
         return new ResponseDto(recommandService.getRecipeCard(id));
+    }
+    @GetMapping("/recommand/random")
+    public ResponseDto randomRecipes(){
+        return new ResponseDto(recommandService.getRandomRecipes().getRecipes());
     }
 }
