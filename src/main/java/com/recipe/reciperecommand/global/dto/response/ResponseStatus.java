@@ -1,4 +1,4 @@
-package com.recipe.reciperecommand.Dto.Response;
+package com.recipe.reciperecommand.global.dto.response;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

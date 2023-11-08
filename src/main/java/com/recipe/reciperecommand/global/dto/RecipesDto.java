@@ -1,4 +1,4 @@
-package com.recipe.reciperecommand.Dto;
+package com.recipe.reciperecommand.global.dto;
 
 import lombok.*;
 

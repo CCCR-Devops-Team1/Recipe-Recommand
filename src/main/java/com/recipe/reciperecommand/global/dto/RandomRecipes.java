@@ -1,4 +1,4 @@
-package com.recipe.reciperecommand.Dto;
+package com.recipe.reciperecommand.global.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;

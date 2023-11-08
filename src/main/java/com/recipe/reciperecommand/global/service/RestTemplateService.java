@@ -1,15 +1,14 @@
-package com.recipe.reciperecommand;
+package com.recipe.reciperecommand.global.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.recipe.reciperecommand.Dto.RandomRecipes;
-import com.recipe.reciperecommand.Dto.RecipeCardDto;
-import com.recipe.reciperecommand.Dto.RecipeDto;
-import com.recipe.reciperecommand.Dto.RecipesDto;
-import com.recipe.reciperecommand.Dto.Response.ResponseDto;
-import com.recipe.reciperecommand.Exception.BaseException;
+import com.recipe.reciperecommand.global.dto.RandomRecipes;
+import com.recipe.reciperecommand.global.dto.RecipeCardDto;
+import com.recipe.reciperecommand.global.dto.RecipeDto;
+import com.recipe.reciperecommand.global.dto.RecipesDto;
+import com.recipe.reciperecommand.global.exception.BaseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -21,8 +20,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-import static com.recipe.reciperecommand.Dto.Response.ResponseStatus.FAIL_JSON_MAPPING;
-import static com.recipe.reciperecommand.Dto.Response.ResponseStatus.FAIL_JSON_PROCESS;
+import static com.recipe.reciperecommand.global.dto.response.ResponseStatus.FAIL_JSON_MAPPING;
+import static com.recipe.reciperecommand.global.dto.response.ResponseStatus.FAIL_JSON_PROCESS;
 
 @Service
 public class RestTemplateService {

@@ -1,10 +1,10 @@
-package com.recipe.reciperecommand.Dto.Response;
+package com.recipe.reciperecommand.global.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static com.recipe.reciperecommand.Dto.Response.ResponseStatus.SUCCESS;
+import static com.recipe.reciperecommand.global.dto.response.ResponseStatus.SUCCESS;
 
 @Getter
 @AllArgsConstructor

@@ -1,7 +1,7 @@
-package com.recipe.reciperecommand.Exception;
+package com.recipe.reciperecommand.global.exception;
 
-import com.recipe.reciperecommand.Dto.Response.ResponseDto;
-import com.recipe.reciperecommand.Dto.Response.ResponseStatus;
+import com.recipe.reciperecommand.global.dto.response.ResponseDto;
+import com.recipe.reciperecommand.global.dto.response.ResponseStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

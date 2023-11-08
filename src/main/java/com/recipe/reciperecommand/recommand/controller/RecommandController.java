@@ -1,11 +1,8 @@
-package com.recipe.reciperecommand;
+package com.recipe.reciperecommand.recommand.controller;
 
-import com.recipe.reciperecommand.Dto.RecipeDto;
-import com.recipe.reciperecommand.Dto.Response.ResponseDto;
+import com.recipe.reciperecommand.global.dto.response.ResponseDto;
+import com.recipe.reciperecommand.recommand.service.RecommandService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

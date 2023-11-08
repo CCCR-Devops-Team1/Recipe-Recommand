@@ -1,11 +1,11 @@
-package com.recipe.reciperecommand;
+package com.recipe.reciperecommand.recommand.service;
 
-import com.recipe.reciperecommand.Dto.RandomRecipes;
-import com.recipe.reciperecommand.Dto.RecipeCardDto;
-import com.recipe.reciperecommand.Dto.RecipeDto;
-import com.recipe.reciperecommand.Dto.RecipesDto;
+import com.recipe.reciperecommand.global.dto.RandomRecipes;
+import com.recipe.reciperecommand.global.dto.RecipeCardDto;
+import com.recipe.reciperecommand.global.dto.RecipeDto;
+import com.recipe.reciperecommand.global.dto.RecipesDto;
+import com.recipe.reciperecommand.global.service.RestTemplateService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
